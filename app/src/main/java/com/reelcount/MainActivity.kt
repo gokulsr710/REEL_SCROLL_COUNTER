@@ -1,5 +1,6 @@
 package com.reelcount
 
+import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -83,9 +84,7 @@ class MainActivity : BaseActivity() {
         btnAccess.setOnClickListener {
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
-        findViewById<Button>(R.id.btnReset).setOnClickListener {
-            Prefs.resetToday(prefs); updateStats()
-        }
+        findViewById<Button>(R.id.btnReset).setOnClickListener { confirmReset() }
 
         // Limits
         val reelLimit = findViewById<EditText>(R.id.reelLimit)
@@ -229,6 +228,27 @@ class MainActivity : BaseActivity() {
     override fun onPause() {
         super.onPause()
         main.removeCallbacks(ticker)
+    }
+
+    /** Ask before wiping today's numbers. */
+    private fun confirmReset() {
+        val c = prefs.getInt(Prefs.COUNT, 0)
+        val time = Prefs.formatTime(prefs.getLong(Prefs.SECONDS, 0))
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Reset today's count?")
+            .setMessage(
+                "This will permanently delete today's progress so far: $c reels and $time of " +
+                    "scrolling time. Your counts will start again from zero. This can't be undone."
+            )
+            .setNegativeButton("Cancel", null)
+            .setPositiveButton("Reset") { _, _ ->
+                Prefs.resetToday(prefs)
+                updateStats()
+                Toast.makeText(this, "Today's count has been reset", Toast.LENGTH_SHORT).show()
+            }
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.chart_over))
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.accent))
     }
 
     private lateinit var heroChar: CharacterView
