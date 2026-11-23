@@ -3,6 +3,7 @@
 build/
 app/build/
 *.apk
+!install/*.apk
 *.aab
 
 # Machine-specific
