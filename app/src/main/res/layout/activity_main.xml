@@ -344,14 +344,5 @@
                 android:text="Count every swipe (use if reels aren't being counted)"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <TextView
-            style="@style/Body"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="6dp"
-            android:text="Reel Counter is switched off in every app not ticked above — UPI, banking, messages and all others. Android never lets it see them. Everything stays on your phone. Counts reset at midnight."
-            android:textColor="@color/text_muted"
-            android:textSize="13sp" />
     </LinearLayout>
 </ScrollView>

@@ -1,6 +1,6 @@
 #  How to install Reel Counter on your phone
 
-**File:** [`ReelCounter-v2.5.apk`](ReelCounter-v2.5.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
+**File:** [`ReelCounter-v2.6.apk`](ReelCounter-v2.6.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
 
 > Reel Counter is for **Android only**. iPhones don't allow apps like this.
 
@@ -28,7 +28,7 @@ This happens to **every** app installed outside the Play Store that uses Accessi
 ## Step-by-step install
 
 ### Step 1: Download the APK
-On your phone, open this page → tap **`ReelCounter-v2.5.apk`** → tap **Download** (the download icon, or *View raw*).
+On your phone, open this page → tap **`ReelCounter-v2.6.apk`** → tap **Download** (the download icon, or *View raw*).
 It saves to your **Downloads** folder.
 
 > On a computer instead? Download it, then copy it to the phone with a USB cable or Google Drive. **Don't send it through WhatsApp**, which can damage or rename the file.
@@ -43,7 +43,7 @@ It saves to your **Downloads** folder.
 **Settings → Security and privacy → Auto Blocker → Off**
 
 ### Step 4: Install
-1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v2.5.apk`**.
+1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v2.6.apk`**.
 2. If it says *"Your phone is not allowed to install unknown apps from this source"*: tap **Settings** → turn on **Allow from this source** → go back.
 3. Tap **Install** → **Open**.
 
