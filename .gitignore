@@ -1,0 +1,17 @@
+# Build output
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+
+# Machine-specific
+local.properties
+.idea/
+*.iml
+.DS_Store
+
+# Signing key — never commit (anyone with it could sign fake updates)
+*.jks
+*.keystore
+keystore.properties

@@ -1,0 +1,16 @@
+<resources>
+    <color name="bg">#F6F6F8</color>
+    <color name="card">#FFFFFF</color>
+    <color name="text_primary">#111111</color>
+    <color name="text_body">#333333</color>
+    <color name="text_row">#222222</color>
+    <color name="text_muted">#888888</color>
+    <color name="chart_main">#6C5CE7</color>
+    <color name="accent">#6C5CE7</color>
+    <color name="divider">#E5E5EA</color>
+    <color name="chart_dim">#C7C7CC</color>
+    <color name="chart_over">#FF3B30</color>
+    <color name="chart_grid">#E5E5EA</color>
+    <color name="good">#248A3D</color>
+    <color name="track">#EFEFF4</color>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Reel Counter</string>
+    <string name="service_description">Counts how many reels / shorts you swipe through and how long you scroll, and shows a small pill at the top of the screen. It only works inside Instagram, YouTube, TikTok, Facebook and Snapchat. It is off in every other app (UPI, banking, messages). Nothing leaves your phone.</string>
+</resources>
