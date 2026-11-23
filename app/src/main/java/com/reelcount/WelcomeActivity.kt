@@ -44,16 +44,16 @@ class WelcomeActivity : BaseActivity() {
             setPadding(dp(20), dp(18), dp(20), dp(18))
         }
         card.addView(text(
-            "This app is completely offline. It doesn't even have permission to use the internet, " +
-                "so none of your data ever leaves your phone.",
+            "Reel Counter works offline. It only counts your reels and the time you spend, " +
+                "and all of that stays right here on this phone.",
             16f, start = true))
         card.addView(text(
             "We don't collect your name, contacts, messages, photos or any other details, " +
-                "and nothing is ever sent to the developer or to anyone else.",
+                "and nothing is ever sent to the developer.",
             16f, start = true).apply { setPadding(0, dp(12), 0, 0) })
         card.addView(text(
-            "Reel Counter only works inside the reel apps you choose, like Instagram and YouTube. " +
-                "It simply counts your reels and the time you spend, and everything stays right here on this phone.",
+            "The app goes online only if you choose to start or join a challenge with friends. " +
+                "Then just your nickname, reel count and scrolling time are shared, and only with the players in that challenge.",
             16f, start = true).apply { setPadding(0, dp(12), 0, 0) })
         col.addView(card, LinearLayout.LayoutParams(-1, -2))
 
@@ -63,7 +63,7 @@ class WelcomeActivity : BaseActivity() {
             gravity = Gravity.CENTER
             setPadding(0, dp(16), 0, dp(26))
         }
-        listOf("Offline", "Private", "On-device").forEach {
+        listOf("Offline first", "Private", "On-device").forEach {
             chips.addView(text(it, 12f, bold = true).apply {
                 background = GradientDrawable().apply {
                     cornerRadius = dp(100).toFloat(); setColor(Color.parseColor("#33FFFFFF"))

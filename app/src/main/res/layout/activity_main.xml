@@ -207,6 +207,14 @@
                     android:text="Reset"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
+            <Button
+                android:id="@+id/btnChallenge"
+                style="@style/BtnBase"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_glass"
+                android:text="Challenge friends"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
 
         <!-- Limits -->

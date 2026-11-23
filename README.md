@@ -10,7 +10,7 @@ An Android app that counts the reels you swipe through and how long you scroll. 
 
 **→ [Download the APK and follow the step-by-step install guide](INSTALLATION_GUIDE/README.md)**
 
-It's an offline app with no internet permission. Your data never leaves your phone.
+Everything works offline. The app only goes online if you start or join a challenge with friends.
 
 ## Features
 
@@ -24,7 +24,8 @@ It's an offline app with no internet permission. Your data never leaves your pho
 - **Daily analysis**: today vs yesterday, 7- and 30-day charts, time of day, and a per-app split. Keeps 90 days of history.
 - **Welcome screen** on first launch explaining that the app is fully offline
 - **Light / Dark / System** theme
-- **Private**: it only runs inside the apps you tick. Android never connects it to UPI, banking or any other app. No internet permission, and nothing leaves the phone.
+- **Challenge friends**: share an invite link and compete to watch the fewest reels by 11:59 PM. Live leaderboard, Reset locked during the challenge, end early only if everyone agrees, results notification at 11:59 PM
+- **Private**: it only runs inside the apps you tick, and Android never connects it to UPI, banking or any other app. It works offline; only Challenge mode goes online, sharing just a nickname, reel count and time with the players in that challenge (anonymous sign-in)
 
 ## Build
 
@@ -53,6 +54,10 @@ keyPassword=...
 
 Without `keystore.properties`, the release build is left unsigned.
 
+### Challenge mode server
+
+Challenge mode uses a free Firebase project. Setup steps and database rules are in [`firebase/`](firebase/README.md). Put the API key and database URL in a git-ignored `firebase.properties`; without it, the app builds fully offline and Challenge mode is turned off.
+
 ## Install & set up
 
 Full illustrated steps: **[INSTALLATION_GUIDE](INSTALLATION_GUIDE/README.md)**. Short version:
@@ -78,6 +83,11 @@ An Accessibility Service, limited to the reel apps' package names, watches **scr
 | `WarningView.kt` | Full-screen warning with "what to do now" steps |
 | `MainActivity.kt` | Home screen: hero card plus settings |
 | `WelcomeActivity.kt` | First-launch welcome and privacy screen |
+| `ChallengeActivity.kt` | Challenge screen: rules pop-up, invite, leaderboard, end vote, results |
+| `Challenge.kt`, `Cloud.kt` | Challenge logic and a minimal Firebase client (anonymous sign-in + Realtime Database over HTTPS) |
+| `Notify.kt` | Results notification at 11:59 PM |
+| `docs/join.html` | Invite page that opens the app (GitHub Pages) |
+| `firebase/` | Database security rules and server setup guide |
 | `AnalysisActivity.kt` + `BarChartView.kt` | Daily analysis screen and charts |
 | `History.kt` | Today's per-app and per-hour stats, plus 90-day history |
 | `Prefs.kt`, `Mood.kt` | Settings, limits and mood thresholds |

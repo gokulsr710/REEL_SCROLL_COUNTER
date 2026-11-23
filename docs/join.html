@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join a Reel Counter challenge</title>
+<meta name="description" content="You've been invited to a Reel Counter challenge: whoever watches the fewest reels by 11:59 PM wins.">
+<style>
+  :root { --bg:#F6F6F8; --card:#FFFFFF; --ink:#111111; --body:#333333; --muted:#6E6E73; --accent:#6C5CE7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#000000; --card:#1C1C1E; --ink:#F2F2F7; --body:#D1D1D6; --muted:#8E8E93; --accent:#8B7CFF; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding:24px 16px 40px; }
+  main { max-width:440px; margin:0 auto; }
+  .hero { border-radius:28px; padding:26px 22px; color:#fff;
+          background:linear-gradient(135deg,#7B61FF,#A35CF0,#FF6FB5); }
+  .hero small { font-weight:700; letter-spacing:.08em; opacity:.85; font-size:12px; }
+  .hero h1 { margin:6px 0 4px; font-size:28px; line-height:1.2; }
+  .hero p { margin:0; opacity:.95; }
+  .code { margin:18px 0 0; background:#ffffff2e; border-radius:16px; padding:14px;
+          text-align:center; font-size:30px; font-weight:800; letter-spacing:.25em; }
+  .btn { display:block; text-align:center; text-decoration:none; font-weight:700;
+         border-radius:999px; padding:16px; margin-top:16px; font-size:17px; }
+  .primary { background:#fff; color:#6C5CE7; }
+  .card { background:var(--card); border-radius:20px; padding:18px; margin-top:14px; }
+  .card h2 { font-size:13px; letter-spacing:.06em; color:var(--muted); margin:0 0 8px; }
+  .card p, .card li { color:var(--body); margin:6px 0; }
+  .card ol { padding-left:20px; margin:0; }
+  a.link { color:var(--accent); font-weight:700; }
+  .err { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <small>REEL COUNTER CHALLENGE</small>
+    <h1>You're invited!</h1>
+    <p>Whoever watches the fewest reels by 11:59 PM tonight wins.</p>
+    <div class="code" id="code">------</div>
+    <a class="btn primary" id="open" href="#">Open in Reel Counter</a>
+  </section>
+
+  <section class="card err" id="bad">
+    <p>This invite link is missing its code. Ask your friend to share the invite again.</p>
+  </section>
+
+  <section class="card">
+    <h2>IF THE BUTTON DOESN'T WORK</h2>
+    <ol>
+      <li>Open <b>Reel Counter</b>.</li>
+      <li>Tap <b>Challenge friends</b>.</li>
+      <li>Enter the code shown above and tap <b>Join challenge</b>.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>DON'T HAVE THE APP YET?</h2>
+    <p>Reel Counter is a free Android app.
+      <a class="link" href="https://github.com/gokulsr710/REEL_SCROLL_COUNTER/tree/main/INSTALLATION_GUIDE">Download it and follow the install guide</a>,
+      then come back to this page.</p>
+  </section>
+</main>
+<script>
+  const raw = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const code = raw.length === 6 ? raw : '';
+  const guide = 'https://github.com/gokulsr710/REEL_SCROLL_COUNTER/tree/main/INSTALLATION_GUIDE';
+  if (code) {
+    document.getElementById('code').textContent = code;
+    // Android intent link: opens the app if installed, otherwise the install guide
+    document.getElementById('open').href =
+      'intent://join/' + code + '#Intent;scheme=reelcounter;package=com.reelcounter.app;' +
+      'S.browser_fallback_url=' + encodeURIComponent(guide) + ';end';
+  } else {
+    document.getElementById('open').style.display = 'none';
+    document.getElementById('code').style.display = 'none';
+    document.getElementById('bad').style.display = 'block';
+  }
+</script>
+</body>
+</html>

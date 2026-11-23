@@ -1,6 +1,6 @@
 #  How to install Reel Counter on your phone
 
-**File:** [`ReelCounter-v2.7.apk`](ReelCounter-v2.7.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
+**File:** [`ReelCounter-v3.0.apk`](ReelCounter-v3.0.apk) · **Needs:** Android 8 or newer · **Size:** about 700 KB
 
 > Reel Counter is for **Android only**. iPhones don't allow apps like this.
 
@@ -14,21 +14,22 @@ Because Accessibility is a powerful permission, and this app isn't from the Play
 
 This happens to **every** app installed outside the Play Store that uses Accessibility. It doesn't mean the app is harmful. To install it, you'll **turn off the scan for a minute, install, and turn it straight back on.**
 
-##  Your privacy: this is an offline app
+## Your privacy
 
-- **No internet permission.** The app doesn't ask for internet access at all, so Android itself prevents it from sending anything anywhere. Its only permission is `VIBRATE`. You can check this in [`AndroidManifest.xml`](../app/src/main/AndroidManifest.xml).
-- **Nothing is sent** to the developer or anyone else: no data, no phone details, no contacts, no messages, no analytics, no ads.
+- **Works offline.** Counting, the timer, warnings and your history all work without internet, and they stay on your phone.
+- **Online only for challenges.** The app has internet permission only for *Challenge mode*. If you never start or join a challenge, nothing is sent anywhere.
+- **In a challenge, very little is shared:** only your nickname, reel count, scrolling time and your "end early" vote, and only with the players in that challenge. Sign-in is anonymous: no email, phone number or account.
+- **Nothing else is ever sent:** no contacts, messages, photos, phone details, analytics or ads. The developer never receives your data.
 - **It only works inside the apps you tick:** Instagram, YouTube, TikTok, Facebook and Snapchat. Android never connects it to **UPI, banking, messages, gallery or any other app**.
 - **What it looks at:** only the *scroll* events of the reels screen, to count swipes. It doesn't read your messages, comments or what's in the videos.
-- **Everything stays on your phone:** your count, time and history. Uninstalling the app deletes all of it.
-- **The full source code is public** in this repository, so anyone can check it.
+- **The full source code is public** in this repository, so anyone can check it. Permissions are listed in [`AndroidManifest.xml`](../app/src/main/AndroidManifest.xml).
 
 ---
 
 ## Step-by-step install
 
 ### Step 1: Download the APK
-On your phone, open this page → tap **`ReelCounter-v2.7.apk`** → tap **Download** (the download icon, or *View raw*).
+On your phone, open this page → tap **`ReelCounter-v3.0.apk`** → tap **Download** (the download icon, or *View raw*).
 It saves to your **Downloads** folder.
 
 > On a computer instead? Download it, then copy it to the phone with a USB cable or Google Drive. **Don't send it through WhatsApp**, which can damage or rename the file.
@@ -43,7 +44,7 @@ It saves to your **Downloads** folder.
 **Settings → Security and privacy → Auto Blocker → Off**
 
 ### Step 4: Install
-1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v2.7.apk`**.
+1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v3.0.apk`**.
 2. If it says *"Your phone is not allowed to install unknown apps from this source"*: tap **Settings** → turn on **Allow from this source** → go back.
 3. Tap **Install** → **Open**.
 
@@ -74,6 +75,15 @@ So the pill keeps showing up:
 3. Swipe 3 reels. You'll see the full-screen warning.
 4. Set your real limits (for example 100 reels / 30 minutes).
 
+### Step 9 (optional): Challenge your friends
+1. On the home screen, tap **Challenge friends** → **Start a challenge**.
+2. Read the rules and tap **I agree**, then choose a nickname.
+3. Share the invite link (for example on WhatsApp). The challenge starts as soon as a friend accepts.
+4. Whoever watches the **fewest reels by 11:59 PM** wins. Results appear right after, as a notification and in the app.
+5. While the challenge is live, **Reset is locked**. It unlocks at 11:59 PM, or earlier if every player agrees to end the challenge.
+
+When asked, allow **notifications** so you get the results.
+
 ---
 
 ## Troubleshooting
@@ -88,6 +98,8 @@ So the pill keeps showing up:
 | **Pill shows but count stays at 0** | Turn on **"Count every swipe"** in Reel Counter settings. |
 | **Pill covers the clock** | Settings → Counter pill → move **Distance from top**, or pick **Right**. |
 | **A UPI or bank app complains about accessibility** | Some banking apps object to *any* accessibility app. Turn Reel Counter off while paying. Quick way: Accessibility → Reel Counter → **Reel Counter shortcut** → hold both **volume keys** to toggle it. |
+| **Challenge invite link doesn't open the app** | Open Reel Counter → **Challenge friends** → type the 6-character code from the invite → **Join challenge**. |
+| **"No internet connection" in Challenge** | Challenges need internet only to sync scores. Counting keeps working offline and syncs when you're back online. |
 | **Stopped working after a while** | The phone put it to sleep. Do **Step 7**, then turn it on again in Accessibility. |
 
 ## Uninstall

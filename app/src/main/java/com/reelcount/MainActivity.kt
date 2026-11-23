@@ -47,6 +47,9 @@ class MainActivity : BaseActivity() {
         }
         setContentView(R.layout.activity_main)
 
+        findViewById<Button>(R.id.btnChallenge).setOnClickListener {
+            startActivity(Intent(this, ChallengeActivity::class.java))
+        }
         findViewById<Button>(R.id.btnAnalysis).setOnClickListener {
             startActivity(Intent(this, AnalysisActivity::class.java))
         }
@@ -232,6 +235,19 @@ class MainActivity : BaseActivity() {
 
     /** Ask before wiping today's numbers. */
     private fun confirmReset() {
+        if (Challenge.isLocked(prefs)) {
+            AlertDialog.Builder(this)
+                .setTitle("Reset is locked")
+                .setMessage("You're in a challenge with friends until 11:59 PM tonight, so your count can't be reset. " +
+                    "Reset unlocks after 11:59 PM, or sooner if every player agrees to end the challenge.")
+                .setNegativeButton("OK", null)
+                .setPositiveButton("View challenge") { _, _ ->
+                    startActivity(Intent(this, ChallengeActivity::class.java))
+                }
+                .show()
+                .getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.accent))
+            return
+        }
         val c = prefs.getInt(Prefs.COUNT, 0)
         val time = Prefs.formatTime(prefs.getLong(Prefs.SECONDS, 0))
         val dialog = AlertDialog.Builder(this)
@@ -275,6 +291,19 @@ class MainActivity : BaseActivity() {
             "$c of $rl reels")
         bar(R.id.timeBar, R.id.timeBarLabel, tl > 0, if (tl > 0) s / (tl * 60f) else 0f,
             "${s / 60} of $tl minutes")
+
+        // Challenge: show status on the button; lock Reset and app choices while live
+        val locked = Challenge.isLocked(prefs)
+        findViewById<Button>(R.id.btnChallenge).text = when {
+            Challenge.code(prefs) == null -> "Challenge friends"
+            locked -> "Challenge live  ·  ${Challenge.myReels(prefs)} reels"
+            Challenge.status(prefs) == "waiting" -> "Challenge  ·  waiting for friends"
+            else -> "View challenge results"
+        }
+        findViewById<Button>(R.id.btnReset).alpha = if (locked) 0.5f else 1f
+        findViewById<Switch>(R.id.swAny).isEnabled = !locked
+        val apps = findViewById<LinearLayout>(R.id.appsBox)
+        for (i in 0 until apps.childCount) apps.getChildAt(i).isEnabled = !locked
     }
 
     private fun bar(barId: Int, labelId: Int, visible: Boolean, fraction: Float, caption: String) {

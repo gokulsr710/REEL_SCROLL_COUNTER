@@ -111,7 +111,40 @@ class ReelCounterService : AccessibilityService(),
                 checkLimits()
             }
             refresh()
+            challengeTick()
             main.postDelayed(this, 1000)
+        }
+    }
+
+    // ---------- friends' challenge ----------
+
+    private var lastChallengeSync = 0L
+
+    /**
+     * While in a challenge: push my progress every 30 s (and once more just before 11:59 PM).
+     * Shortly after 11:59 PM: fetch the final standings and post the results notification.
+     */
+    private fun challengeTick() {
+        if (!Cloud.configured) return
+        val code = Challenge.code(prefs) ?: return
+        val now = System.currentTimeMillis()
+        val ends = Challenge.endsAt(prefs)
+        if (now < ends) {
+            val finalPush = ends - now < 20_000 && !Challenge.finalPushed(prefs)
+            if (finalPush) Challenge.markFinalPushed(prefs)
+            if (finalPush || now - lastChallengeSync >= 30_000) {
+                lastChallengeSync = now
+                Cloud.run({ Challenge.sync(this) })
+            }
+        } else if (now >= ends + 30_000 && !Challenge.notified(prefs)) {
+            Challenge.markNotified(prefs)
+            Cloud.run({ Challenge.fetch(this, code) }) { r ->
+                r.getOrNull()?.let { st ->
+                    if (st.status != "ended" && st.members.size >= 2) {
+                        Notify.results(this, st, Cloud.uidOrNull(this))
+                    }
+                }
+            }
         }
     }
 

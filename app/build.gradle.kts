@@ -5,6 +5,11 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+val firebaseProps = Properties().apply {
+    val f = rootProject.file("firebase.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+
 val keystoreProps = Properties().apply {
     val f = rootProject.file("keystore.properties")
     if (f.exists()) f.inputStream().use { load(it) }
@@ -18,9 +23,13 @@ android {
         applicationId = "com.reelcounter.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 17
-        versionName = "2.7"
+        versionCode = 18
+        versionName = "3.0"
+        // Challenge mode server (from firebase.properties; empty = challenge mode off)
+        buildConfigField("String", "FIREBASE_API_KEY", "\"${firebaseProps.getProperty("apiKey", "")}\"")
+        buildConfigField("String", "FIREBASE_DB_URL", "\"${firebaseProps.getProperty("databaseUrl", "")}\"")
     }
+    buildFeatures { buildConfig = true }
     signingConfigs {
         create("release") {
             if (keystoreProps.isNotEmpty()) {
