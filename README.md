@@ -22,6 +22,7 @@ It's an offline app with no internet permission. Your data never leaves your pho
 - **Full-screen warning** with Sprout, your stats and **3 "what to do now" steps** (breathe, a healthy break, close the app). **Close app** sends you home; **Keep watching** unlocks after 5 seconds.
 - **Sound + vibration** on warning (pick any phone sound). The reel's audio pauses while the warning shows.
 - **Daily analysis**: today vs yesterday, 7- and 30-day charts, time of day, and a per-app split. Keeps 90 days of history.
+- **Welcome screen** on first launch explaining that the app is fully offline
 - **Light / Dark / System** theme
 - **Private**: it only runs inside the apps you tick. Android never connects it to UPI, banking or any other app. No internet permission, and nothing leaves the phone.
 
@@ -76,6 +77,7 @@ An Accessibility Service, limited to the reel apps' package names, watches **scr
 | `CharacterView.kt` | Sprout: Canvas drawing and mood animation |
 | `WarningView.kt` | Full-screen warning with "what to do now" steps |
 | `MainActivity.kt` | Home screen: hero card plus settings |
+| `WelcomeActivity.kt` | First-launch welcome and privacy screen |
 | `AnalysisActivity.kt` + `BarChartView.kt` | Daily analysis screen and charts |
 | `History.kt` | Today's per-app and per-hour stats, plus 90-day history |
 | `Prefs.kt`, `Mood.kt` | Settings, limits and mood thresholds |

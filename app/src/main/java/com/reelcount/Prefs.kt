@@ -23,6 +23,7 @@ object Prefs {
     const val THEME = "theme"            // "system" | "light" | "dark"
     const val POSITION = "position"      // "left" | "center" | "right"
     const val FULLSCREEN_WARN = "fullscreen_warn"
+    const val WELCOMED = "welcomed"           // welcome screen already shown
     const val WARNED_LEVEL = "warned_level"   // highest limit level already warned about today
     const val SOUND = "sound"            // play a sound on warning
     const val SOUND_URI = "sound_uri"    // chosen ringtone; null = phone's default notification sound

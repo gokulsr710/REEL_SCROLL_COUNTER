@@ -24,6 +24,10 @@
             android:exported="false"
             android:label="Daily analysis" />
 
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+
         <service
             android:name=".ReelCounterService"
             android:exported="true"

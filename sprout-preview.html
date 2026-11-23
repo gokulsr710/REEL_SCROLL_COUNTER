@@ -50,6 +50,26 @@
   <span class="pill" id="pill"><canvas id="pillC" width="64" height="64"></canvas><span id="pillT">40 · 8:12</span></span>
 </div>
 
+
+<h1 style="margin-top:30px">Welcome screen</h1>
+<p class="sub">Shown once, the first time the app opens.</p>
+<div style="max-width:380px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#7B61FF,#A35CF0,#FF6FB5);color:#fff;padding:28px 26px;text-align:center">
+  <canvas id="welC" width="340" height="340" style="width:170px;height:170px"></canvas>
+  <div style="font-size:34px;font-weight:800;margin-top:6px">Hi there! 👋</div>
+  <div style="font-size:18px;font-weight:700;opacity:.95;margin:6px 0 20px">I'm Sprout. Welcome to Reel Counter!</div>
+  <div style="background:#ffffff2e;border-radius:22px;padding:18px 20px;text-align:left;font-size:16px;line-height:1.45">
+    <p style="margin:0">This app is completely offline. It doesn't even have permission to use the internet, so none of your data ever leaves your phone.</p>
+    <p style="margin:12px 0 0">We don't collect your name, contacts, messages, photos or any other details, and nothing is ever sent to the developer or to anyone else.</p>
+    <p style="margin:12px 0 0">Reel Counter only works inside the reel apps you choose, like Instagram and YouTube. It simply counts your reels and the time you spend, and everything stays right here on this phone.</p>
+  </div>
+  <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:16px 0 26px;font-size:12px;font-weight:700">
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">📴 Offline</span>
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">🔒 No data</span>
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">📱 On-device</span>
+  </div>
+  <div style="background:#fff;color:#6C5CE7;border-radius:99px;padding:16px;font-weight:800;font-size:17px">OK, let's go</div>
+</div>
+
 <script>
 const YELLOW=[255,205,77], AMBER=[245,176,79], GREY=[169,177,194], GREEN=[92,203,111], GREEN_DARK=[62,158,82],
       GREY_LEAF=[157,168,159], GREY_DARK=[125,133,127], INK='#2D2A32', TONGUE='#FF7A8A';
@@ -127,6 +147,7 @@ function frame(ts){ const t=ts/1000; for(const [cv,r] of cards) draw(cv,r,t);
   document.getElementById('heroN').textContent=slider.value; document.getElementById('heroMood').textContent='Sprout: '+moodText(target);
   document.getElementById('pillT').textContent=`${slider.value} · ${Math.floor(slider.value*0.3)}:${String(slider.value*7%60).padStart(2,'0')}`;
   document.getElementById('pill').classList.toggle('over',target>=1);
+  draw(document.getElementById('welC'),0,t);
   requestAnimationFrame(frame); }
 requestAnimationFrame(frame);
 </script>

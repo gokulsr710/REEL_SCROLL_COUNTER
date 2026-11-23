@@ -38,6 +38,12 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // First launch: show the welcome screen once
+        if (!prefs.getBoolean(Prefs.WELCOMED, false)) {
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
+            return
+        }
         setContentView(R.layout.activity_main)
 
         findViewById<Button>(R.id.btnAnalysis).setOnClickListener {
