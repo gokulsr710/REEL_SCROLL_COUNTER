@@ -3,10 +3,10 @@
 An Android app that counts the reels you swipe through and how long you scroll. It shows a small pill at the top of the screen, like a "dynamic island", with **Sprout**, a little character who gets sad and exhausted as you go past your limit.
 
 ```
- (🙂) 23 · 4:12
+ 23 · 4:12
 ```
 
-## 📲 Just want to install it?
+## Installing the app
 
 **→ [Download the APK and follow the step-by-step install guide](INSTALLATION_GUIDE/README.md)**
 
@@ -17,7 +17,7 @@ It's an offline app with no internet permission. Your data never leaves your pho
 - **Counts reels** in Instagram Reels, YouTube Shorts, TikTok, Facebook Reels and Snapchat Spotlight
 - **Timer** runs the whole time a reel app is open, whether you're swiping or not
 - **Pill at the top of the screen**: left, center or right, with adjustable distance from the top. Tap it to see your limits.
-- **Sprout 🌱** appears when the timer starts and gradually changes: active → worried → sad → drained → exhausted
+- **Sprout**, an animated character, appears when the timer starts and gradually changes: active → worried → sad → drained → exhausted
 - **Daily limits** for reels and minutes. You get **one warning for whichever limit you hit first**, then again at 2×, 3×…
 - **Full-screen warning** with Sprout, your stats and **3 "what to do now" steps** (breathe, a healthy break, close the app). **Close app** sends you home; **Keep watching** unlocks after 5 seconds.
 - **Sound + vibration** on warning (pick any phone sound). The reel's audio pauses while the warning shows.
@@ -28,7 +28,7 @@ It's an offline app with no internet permission. Your data never leaves your pho
 
 ## Build
 
-Requires JDK 17 and the Android SDK (platform 34). Easiest: open the folder in **Android Studio** and press ▶ Run.
+Requires JDK 17 and the Android SDK (platform 34). Easiest: open the folder in **Android Studio** and press Run.
 
 From the command line:
 
@@ -57,7 +57,7 @@ Without `keystore.properties`, the release build is left unsigned.
 
 Full illustrated steps: **[INSTALLATION_GUIDE](INSTALLATION_GUIDE/README.md)**. Short version:
 
-1. Install the APK. If **Play Protect** blocks it ("sensitive permissions"): Play Store → profile → Play Protect → ⚙️ → turn off scanning, install, then turn it back on. On Samsung you may also need to turn off **Auto Blocker** for a moment.
+1. Install the APK. If **Play Protect** blocks it ("sensitive permissions"): Play Store → profile → Play Protect → Settings → turn off scanning, install, then turn it back on. On Samsung you may also need to turn off **Auto Blocker** for a moment.
 2. Open **Reel Counter** → **Turn on Reel Counter** → Accessibility → **Installed apps** → **Reel Counter** → On.
 3. **Android 13+:** if the switch is greyed out, go to Settings → Apps → Reel Counter → ⋮ → **Allow restricted settings**.
 4. **Samsung:** set Reel Counter's battery to **Unrestricted** so it isn't put to sleep.

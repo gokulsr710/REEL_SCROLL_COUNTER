@@ -141,7 +141,7 @@ class AnalysisActivity : BaseActivity() {
         content.addView(card().apply {
             addView(label("BY APP · TODAY"))
             val apps = today.apps.entries.sortedByDescending { if (showTime) it.value.second else it.value.first.toLong() }
-            if (apps.isEmpty()) addView(text("No reels yet today 🎉", 15f, cMuted))
+            if (apps.isEmpty()) addView(text("No reels yet today.", 15f, cMuted))
             val maxV = apps.maxOfOrNull { if (showTime) it.value.second.toFloat() else it.value.first.toFloat() } ?: 1f
             apps.forEach { (pkg, cs) ->
                 val name = Prefs.SUPPORTED[pkg] ?: pkg
@@ -175,15 +175,15 @@ class AnalysisActivity : BaseActivity() {
 
     private fun compare(today: Float, yesterday: Float): TextView {
         if (yesterday <= 0f) return text(
-            if (today > 0f) "No data for yesterday yet" else "Nothing yet today — nice 👏", 14f, cMuted)
+            if (today > 0f) "No data for yesterday yet" else "Nothing yet today.", 14f, cMuted)
         val change = ((today - yesterday) / yesterday * 100).roundToInt()
         val up = change > 0
         val what = if (showTime) "time" else "reels"
         return text(
             when {
                 change == 0 -> "Same as yesterday"
-                up -> "▲ $change% more $what than yesterday"
-                else -> "▼ ${abs(change)}% fewer $what than yesterday"
+                up -> "$change% more $what than yesterday"
+                else -> "${abs(change)}% fewer $what than yesterday"
             },
             14f, if (up) cOver else cGood, bold = true)
     }

@@ -55,7 +55,7 @@
 <p class="sub">Shown once, the first time the app opens.</p>
 <div style="max-width:380px;border-radius:28px;overflow:hidden;background:linear-gradient(135deg,#7B61FF,#A35CF0,#FF6FB5);color:#fff;padding:28px 26px;text-align:center">
   <canvas id="welC" width="340" height="340" style="width:170px;height:170px"></canvas>
-  <div style="font-size:34px;font-weight:800;margin-top:6px">Hi there! 👋</div>
+  <div style="font-size:34px;font-weight:800;margin-top:6px">Hi there!</div>
   <div style="font-size:18px;font-weight:700;opacity:.95;margin:6px 0 20px">I'm Sprout. Welcome to Reel Counter!</div>
   <div style="background:#ffffff2e;border-radius:22px;padding:18px 20px;text-align:left;font-size:16px;line-height:1.45">
     <p style="margin:0">This app is completely offline. It doesn't even have permission to use the internet, so none of your data ever leaves your phone.</p>
@@ -63,9 +63,9 @@
     <p style="margin:12px 0 0">Reel Counter only works inside the reel apps you choose, like Instagram and YouTube. It simply counts your reels and the time you spend, and everything stays right here on this phone.</p>
   </div>
   <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:16px 0 26px;font-size:12px;font-weight:700">
-    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">📴 Offline</span>
-    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">🔒 No data</span>
-    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">📱 On-device</span>
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">Offline</span>
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">Private</span>
+    <span style="background:#ffffff33;border-radius:99px;padding:6px 10px">On-device</span>
   </div>
   <div style="background:#fff;color:#6C5CE7;border-radius:99px;padding:16px;font-weight:800;font-size:17px">OK, let's go</div>
 </div>
@@ -135,7 +135,7 @@ function draw(cv, r, t){
       c.font=`bold ${s*(0.14+0.06*k)}px system-ui`; c.fillText('z',cx+bw*0.38+k*s*0.12,top-k*s*0.18); } }
 }
 
-const moodText=r=> r<0.5?'Full of energy! ✨': r<0.8?'Doing good': r<1.0?'Getting tired…': r<1.4?'Feeling sad 😢':'Exhausted… time to rest 😴';
+const moodText=r=> r<0.5?'Full of energy': r<0.8?'Doing good': r<1.0?'Getting tired…': r<1.4?'Feeling sad':'Exhausted, time to rest';
 const stages=[[0.2,'Active','20 of 100 reels'],[0.85,'Worried','85 of 100'],[1.15,'Sad','115 of 100'],[1.5,'Drained','150 of 100'],[2.0,'Exhausted','200 of 100']];
 const row=document.getElementById('row'); const cards=[];
 for(const [r,name,sub] of stages){ const d=document.createElement('div'); d.className='card';

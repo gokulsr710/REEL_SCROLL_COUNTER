@@ -196,7 +196,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/btn_white"
-                    android:text="📊  Daily analysis"
+                    android:text="Daily analysis"
                     android:textColor="#6C5CE7" />
                 <Button
                     android:id="@+id/btnReset"
@@ -222,7 +222,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="🎬  Reels per day" />
+                    android:text="Reels per day" />
                 <EditText android:id="@+id/reelLimit" style="@style/Input" android:hint="100" android:maxLength="5" />
             </LinearLayout>
             <View style="@style/Divider" />
@@ -236,7 +236,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="⏱  Minutes per day" />
+                    android:text="Minutes per day" />
                 <EditText android:id="@+id/timeLimit" style="@style/Input" android:hint="30" android:maxLength="4" />
             </LinearLayout>
             <TextView
@@ -257,11 +257,11 @@
         <!-- Warnings -->
         <TextView style="@style/Section" android:text="WHEN A LIMIT IS HIT" />
         <LinearLayout style="@style/Card">
-            <Switch android:id="@+id/swFullscreen" style="@style/Row" android:text="🛑  Full-screen warning" />
+            <Switch android:id="@+id/swFullscreen" style="@style/Row" android:text="Full-screen warning" />
             <View style="@style/Divider" />
-            <Switch android:id="@+id/swVibrate" style="@style/Row" android:text="📳  Vibrate" />
+            <Switch android:id="@+id/swVibrate" style="@style/Row" android:text="Vibrate" />
             <View style="@style/Divider" />
-            <Switch android:id="@+id/swSound" style="@style/Row" android:text="🔔  Play a sound" />
+            <Switch android:id="@+id/swSound" style="@style/Row" android:text="Play a sound" />
             <LinearLayout
                 android:id="@+id/soundRow"
                 android:layout_width="match_parent"
@@ -280,7 +280,7 @@
                     style="@style/BtnSoft"
                     android:layout_width="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="▶ Test" />
+                    android:text="Test" />
             </LinearLayout>
         </LinearLayout>
 
@@ -350,7 +350,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="6dp"
-            android:text="🔒 Reel Counter is switched off in every app not ticked above — UPI, banking, messages and all others. Android never lets it see them. Everything stays on your phone. Counts reset at midnight."
+            android:text="Reel Counter is switched off in every app not ticked above — UPI, banking, messages and all others. Android never lets it see them. Everything stays on your phone. Counts reset at midnight."
             android:textColor="@color/text_muted"
             android:textSize="13sp" />
     </LinearLayout>

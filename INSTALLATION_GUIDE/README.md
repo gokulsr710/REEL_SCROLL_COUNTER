@@ -1,12 +1,12 @@
 #  How to install Reel Counter on your phone
 
-**File:** [`ReelCounter-v2.4.apk`](ReelCounter-v2.4.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
+**File:** [`ReelCounter-v2.5.apk`](ReelCounter-v2.5.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
 
 > Reel Counter is for **Android only**. iPhones don't allow apps like this.
 
 ---
 
-## ⚠️ Read this first: why your phone will warn you
+## Read this first: why your phone will warn you
 
 Reel Counter needs **Accessibility permission**. That's the only way Android lets an app notice when you swipe to a new reel inside Instagram, YouTube and the others.
 
@@ -28,7 +28,7 @@ This happens to **every** app installed outside the Play Store that uses Accessi
 ## Step-by-step install
 
 ### Step 1: Download the APK
-On your phone, open this page → tap **`ReelCounter-v2.4.apk`** → tap **Download** (the ⬇ button, or *View raw*).
+On your phone, open this page → tap **`ReelCounter-v2.5.apk`** → tap **Download** (the download icon, or *View raw*).
 It saves to your **Downloads** folder.
 
 > On a computer instead? Download it, then copy it to the phone with a USB cable or Google Drive. **Don't send it through WhatsApp**, which can damage or rename the file.
@@ -36,19 +36,19 @@ It saves to your **Downloads** folder.
 ### Step 2: Turn off Google Play Protect for a moment
 1. Open the **Play Store**.
 2. Tap your **profile picture** (top right) → **Play Protect**.
-3. Tap **⚙️ Settings** (top right).
+3. Tap **Settings** (gear icon, top right).
 4. Turn **off** *Scan apps with Play Protect* → tap **Turn off**.
 
 ### Step 3 (Samsung only): Turn off Auto Blocker for a moment
 **Settings → Security and privacy → Auto Blocker → Off**
 
 ### Step 4: Install
-1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v2.4.apk`**.
+1. Open the **My Files** / **Files** app → **Downloads** → tap **`ReelCounter-v2.5.apk`**.
 2. If it says *"Your phone is not allowed to install unknown apps from this source"*: tap **Settings** → turn on **Allow from this source** → go back.
 3. Tap **Install** → **Open**.
 
 ### Step 5: Turn the protection back on 
-- Play Store → profile → **Play Protect** → ⚙️ → turn **Scan apps with Play Protect** back **on**.
+- Play Store → profile → **Play Protect** → **Settings** → turn **Scan apps with Play Protect** back **on**.
 - Samsung: **Auto Blocker → On**.
 
 Reel Counter stays installed.
@@ -68,15 +68,15 @@ So the pill keeps showing up:
 - **Samsung:** also **Settings → Battery → Background usage limits → Never sleeping apps → + → Reel Counter**
 - **Xiaomi / Redmi / POCO:** App info → **Autostart: On**, Battery saver → **No restrictions**
 
-### Step 8: Try it 🎉
+### Step 8: Try it
 1. In Reel Counter, set **Reels per day** to **3** → **Save limits**.
-2. Open **Instagram Reels** or **YouTube Shorts**. The pill with Sprout 🌱 appears at the top.
+2. Open **Instagram Reels** or **YouTube Shorts**. The pill with Sprout appears at the top.
 3. Swipe 3 reels. You'll see the full-screen warning.
 4. Set your real limits (for example 100 reels / 30 minutes).
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|

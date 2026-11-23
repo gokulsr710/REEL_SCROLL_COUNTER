@@ -15,7 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 
 /**
- * The tiny "dynamic island" style pill:  (🙂) 23 · 4:12
+ * The tiny "dynamic island" style pill:  [Sprout] 23 · 4:12
  * The character pops in when the timer starts and gets sadder as you pass your limit.
  * Tap to see your limits. Turns red with a message when a limit is hit.
  */
@@ -113,7 +113,7 @@ class PillView(context: Context) : LinearLayout(context) {
 
     private fun render() {
         val time = Prefs.formatTime(seconds)
-        val icon = if (face.visibility == View.VISIBLE) "" else "▶ "
+        val icon = ""
         text.text = when (mode) {
             Mode.NORMAL -> "$icon$count · $time"
             Mode.DETAILS -> {
@@ -121,7 +121,7 @@ class PillView(context: Context) : LinearLayout(context) {
                 val t = if (timeLimitMin > 0) "$time / ${timeLimitMin}m" else time
                 "$r · $t"
             }
-            Mode.WARNING -> "⚠ $message"
+            Mode.WARNING -> message
         }
         bg.setColor(
             when {

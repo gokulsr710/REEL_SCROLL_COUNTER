@@ -31,7 +31,7 @@ class WelcomeActivity : BaseActivity() {
         col.addView(CharacterView(this).apply { setRatio(0f, immediate = true) },
             LinearLayout.LayoutParams(dp(170), dp(170)))
 
-        col.addView(text("Hi there! 👋", 34f, bold = true).apply { setPadding(0, dp(6), 0, 0) })
+        col.addView(text("Hi there!", 34f, bold = true).apply { setPadding(0, dp(6), 0, 0) })
         col.addView(text("I'm Sprout. Welcome to Reel Counter!", 18f, bold = true, alpha = 0.95f)
             .apply { setPadding(0, dp(6), 0, dp(20)) })
 
@@ -63,7 +63,7 @@ class WelcomeActivity : BaseActivity() {
             gravity = Gravity.CENTER
             setPadding(0, dp(16), 0, dp(26))
         }
-        listOf("📴 Offline", "🔒 No data", "📱 On-device").forEach {
+        listOf("Offline", "Private", "On-device").forEach {
             chips.addView(text(it, 12f, bold = true).apply {
                 background = GradientDrawable().apply {
                     cornerRadius = dp(100).toFloat(); setColor(Color.parseColor("#33FFFFFF"))

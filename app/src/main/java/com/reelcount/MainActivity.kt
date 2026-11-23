@@ -185,7 +185,7 @@ class MainActivity : BaseActivity() {
     private var testTone: Ringtone? = null
 
     private fun updateSoundLabel() {
-        btnSound.text = "🔔 ${Prefs.soundTitle(this, prefs)}"
+        btnSound.text = "Sound: ${Prefs.soundTitle(this, prefs)}"
     }
 
     @Deprecated("Ringtone picker result")
@@ -219,7 +219,7 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         val on = serviceEnabled()
-        status.text = if (on) "●  Running" else "●  Off"
+        status.text = if (on) "Running" else "Off"
         status.setTextColor(getColor(if (on) R.color.good else R.color.chart_over))
         findViewById<View>(R.id.offCard).visibility = if (on) View.GONE else View.VISIBLE
         status.setOnClickListener { startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }
@@ -246,15 +246,15 @@ class MainActivity : BaseActivity() {
         val ratio = currentRatio()
 
         statCount.text = "$c"
-        statTime.text = "⏱  ${Prefs.formatTime(s)} scrolling"
+        statTime.text = "${Prefs.formatTime(s)} scrolling"
         heroChar.setRatio(ratio)
         findViewById<TextView>(R.id.moodText).text =
-            if (c == 0 && s == 0L) "Sprout is ready ✨" else "Sprout: ${Mood.text(ratio)}"
+            if (c == 0 && s == 0L) "Sprout is ready" else "Sprout: ${Mood.text(ratio)}"
 
         bar(R.id.reelBar, R.id.reelBarLabel, rl > 0, if (rl > 0) c / rl.toFloat() else 0f,
-            "🎬  $c of $rl reels")
+            "$c of $rl reels")
         bar(R.id.timeBar, R.id.timeBarLabel, tl > 0, if (tl > 0) s / (tl * 60f) else 0f,
-            "⏱  ${s / 60} of $tl minutes")
+            "${s / 60} of $tl minutes")
     }
 
     private fun bar(barId: Int, labelId: Int, visible: Boolean, fraction: Float, caption: String) {

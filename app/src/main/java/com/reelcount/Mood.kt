@@ -9,10 +9,10 @@ object Mood {
     }
 
     fun text(r: Float): String = when {
-        r < 0.5f -> "Full of energy! ✨"
+        r < 0.5f -> "Full of energy"
         r < 0.8f -> "Doing good"
         r < 1.0f -> "Getting tired…"
-        r < 1.4f -> "Feeling sad 😢"
-        else -> "Exhausted… time to rest 😴"
+        r < 1.4f -> "Feeling sad"
+        else -> "Exhausted, time to rest"
     }
 }
