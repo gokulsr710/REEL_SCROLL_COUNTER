@@ -1,4 +1,4 @@
-# 📲 How to install Reel Counter on your phone
+#  How to install Reel Counter on your phone
 
 **File:** [`ReelCounter-v2.3.apk`](ReelCounter-v2.3.apk) · **Needs:** Android 8 or newer · **Size:** about 650 KB
 
@@ -14,7 +14,7 @@ Because Accessibility is a powerful permission, and this app isn't from the Play
 
 This happens to **every** app installed outside the Play Store that uses Accessibility. It doesn't mean the app is harmful. To install it, you'll **turn off the scan for a minute, install, and turn it straight back on.**
 
-## 🔒 Your privacy: this is an offline app
+##  Your privacy: this is an offline app
 
 - **No internet permission.** The app doesn't ask for internet access at all, so Android itself prevents it from sending anything anywhere. Its only permission is `VIBRATE`. You can check this in [`AndroidManifest.xml`](../app/src/main/AndroidManifest.xml).
 - **Nothing is sent** to the developer or anyone else: no data, no phone details, no contacts, no messages, no analytics, no ads.
@@ -25,7 +25,7 @@ This happens to **every** app installed outside the Play Store that uses Accessi
 
 ---
 
-## ✅ Step-by-step install
+## Step-by-step install
 
 ### Step 1: Download the APK
 On your phone, open this page → tap **`ReelCounter-v2.3.apk`** → tap **Download** (the ⬇ button, or *View raw*).
@@ -47,7 +47,7 @@ It saves to your **Downloads** folder.
 2. If it says *"Your phone is not allowed to install unknown apps from this source"*: tap **Settings** → turn on **Allow from this source** → go back.
 3. Tap **Install** → **Open**.
 
-### Step 5: Turn the protection back on 🔁
+### Step 5: Turn the protection back on 
 - Play Store → profile → **Play Protect** → ⚙️ → turn **Scan apps with Play Protect** back **on**.
 - Samsung: **Auto Blocker → On**.
 
@@ -90,5 +90,5 @@ So the pill keeps showing up:
 | **A UPI or bank app complains about accessibility** | Some banking apps object to *any* accessibility app. Turn Reel Counter off while paying. Quick way: Accessibility → Reel Counter → **Reel Counter shortcut** → hold both **volume keys** to toggle it. |
 | **Stopped working after a while** | The phone put it to sleep. Do **Step 7**, then turn it on again in Accessibility. |
 
-## 🗑️ Uninstall
+## Uninstall
 **Settings → Apps → Reel Counter → Uninstall.** All its data is deleted with it.
