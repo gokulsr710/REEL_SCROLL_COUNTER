@@ -8,7 +8,7 @@ An Android app that counts the reels you swipe through and how long you scroll. 
 
 ## 📲 Just want to install it?
 
-**→ [Download the APK and follow the step-by-step install guide](install/README.md)**
+**→ [Download the APK and follow the step-by-step install guide](INSTALLATION_GUIDE/README.md)**
 
 It's an offline app with no internet permission. Your data never leaves your phone.
 
@@ -54,7 +54,7 @@ Without `keystore.properties`, the release build is left unsigned.
 
 ## Install & set up
 
-Full illustrated steps: **[install/README.md](install/README.md)**. Short version:
+Full illustrated steps: **[INSTALLATION_GUIDE](INSTALLATION_GUIDE/README.md)**. Short version:
 
 1. Install the APK. If **Play Protect** blocks it ("sensitive permissions"): Play Store → profile → Play Protect → ⚙️ → turn off scanning, install, then turn it back on. On Samsung you may also need to turn off **Auto Blocker** for a moment.
 2. Open **Reel Counter** → **Turn on Reel Counter** → Accessibility → **Installed apps** → **Reel Counter** → On.
