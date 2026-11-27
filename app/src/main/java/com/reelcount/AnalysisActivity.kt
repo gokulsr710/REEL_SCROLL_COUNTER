@@ -117,6 +117,29 @@ class AnalysisActivity : BaseActivity() {
             ))
         })
 
+        // ---- Screen time (all apps, phone unlocked) — same in both tabs
+        val screenLimit = Prefs.screenLimitMin(prefs)
+        val screen7 = days7.map { it.screen / 60f }
+        content.addView(card().apply {
+            addView(label("SCREEN TIME · ALL APPS"))
+            addView(text(mins(today.screen), 32f, cPrimary, bold = true))
+            addView(text(
+                if (yesterday.screen > 0) "Yesterday: ${mins(yesterday.screen)}" else "Time your phone was unlocked today",
+                14f, cBody))
+            addView(chart(dp(150)).apply {
+                set(screen7.toFloatArray(),
+                    days7.mapIndexed { i, d -> if (i == 6) "Today" else d.date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()) }.toTypedArray(),
+                    days7.map { if (it.screen >= 60) mins(it.screen) else "" }.toTypedArray(),
+                    screenLimit.toFloat(), if (screenLimit > 0) "limit" else "")
+            })
+            val tracked = days7.filter { it.screen > 0 }
+            addView(tiles(
+                "Daily avg" to mins(if (tracked.isEmpty()) 0 else tracked.sumOf { it.screen } / tracked.size),
+                "Week total" to mins(days7.sumOf { it.screen }),
+                "Limit" to if (screenLimit > 0) mins(screenLimit * 60L) else "Off",
+            ))
+        })
+
         // ---- Time of day (reels per hour, last 7 days)
         val hours = IntArray(24).also { h -> days7.forEach { d -> d.hours.forEachIndexed { i, n -> h[i] += n } } }
         content.addView(card().apply {

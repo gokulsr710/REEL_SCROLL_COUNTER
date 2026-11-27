@@ -24,6 +24,7 @@ Everything works offline. The app only goes online if you start or join a challe
 - **Daily analysis**: today vs yesterday, 7- and 30-day charts, time of day, and a per-app split. Keeps 90 days of history.
 - **Welcome screen** on first launch explaining that the app is fully offline
 - **Light / Dark / System** theme
+- **Screen time**: how long your phone was unlocked today across all apps, with its own daily limit and full-screen warning ("Lock phone" or "Keep using"), plus a 7-day chart in Daily analysis. No extra permission needed
 - **Challenge friends**: share an invite link and compete to watch the fewest reels by 11:59 PM. Live leaderboard, Reset locked during the challenge, end early only if everyone agrees, results notification at 11:59 PM
 - **Private**: it only runs inside the apps you tick, and Android never connects it to UPI, banking or any other app. It works offline; only Challenge mode goes online, sharing just a nickname, reel count and time with the players in that challenge (anonymous sign-in)
 

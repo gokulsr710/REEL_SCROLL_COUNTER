@@ -23,8 +23,8 @@ android {
         applicationId = "com.reelcounter.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 18
-        versionName = "3.0"
+        versionCode = 19
+        versionName = "3.1"
         // Challenge mode server (from firebase.properties; empty = challenge mode off)
         buildConfigField("String", "FIREBASE_API_KEY", "\"${firebaseProps.getProperty("apiKey", "")}\"")
         buildConfigField("String", "FIREBASE_DB_URL", "\"${firebaseProps.getProperty("databaseUrl", "")}\"")

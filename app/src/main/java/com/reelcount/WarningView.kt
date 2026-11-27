@@ -23,7 +23,9 @@ class WarningView(
     context: Context,
     headline: String,
     detail: String,
-    appLabel: String,
+    private val closeLabel: String,     // e.g. "Close Instagram" or "Lock phone"
+    private val lastStep: String,       // third "what to do now" step
+    private val keepLabel: String,      // e.g. "Keep watching" or "Keep using"
     ratio: Float,
     private val onClose: () -> Unit,
     private val onContinue: () -> Unit,
@@ -63,12 +65,12 @@ class WarningView(
         col.addView(stepsCard(listOf(
             "Take 3 slow, deep breaths: in for 3 seconds, out for 3",
             middle,
-            "Close $appLabel and put your phone face-down",
+            lastStep,
         )), LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
         ).apply { bottomMargin = dp(22) })
 
-        val closeBtn = text("Close $appLabel", 17f, Color.WHITE, bold = true).apply {
+        val closeBtn = text(closeLabel, 17f, Color.WHITE, bold = true).apply {
             background = GradientDrawable().apply {
                 cornerRadius = dp(28).toFloat(); setColor(Color.parseColor("#FF3B30"))
             }
@@ -125,12 +127,12 @@ class WarningView(
 
     private fun countdown() {
         if (secondsLeft > 0) {
-            keepBtn.text = "Keep watching ($secondsLeft)"
+            keepBtn.text = "$keepLabel ($secondsLeft)"
             keepBtn.alpha = 0.5f
             secondsLeft--
             main.postDelayed({ countdown() }, 1000)
         } else {
-            keepBtn.text = "Keep watching"
+            keepBtn.text = keepLabel
             keepBtn.alpha = 1f
         }
     }

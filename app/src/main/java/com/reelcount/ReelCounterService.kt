@@ -12,6 +12,8 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.os.PowerManager
+import android.app.KeyguardManager
+import android.widget.Toast
 import android.os.SystemClock
 import android.os.VibrationEffect
 import android.os.Vibrator
@@ -106,6 +108,9 @@ class ReelCounterService : AccessibilityService(),
             val interactive = (getSystemService(POWER_SERVICE) as PowerManager).isInteractive
             // Timer runs the whole time a reel app is open with the screen on,
             // whether you're swiping or just watching.
+            // Screen time: phone unlocked and screen on, in any app
+            val locked = (getSystemService(KEYGUARD_SERVICE) as KeyguardManager).isKeyguardLocked
+            if (interactive && !locked) checkScreenLimit(History.recordScreenSecond(prefs))
             if (interactive && isTracked(fgPkg)) {
                 History.recordSecond(prefs, fgPkg)
                 checkLimits()
@@ -239,6 +244,16 @@ class ReelCounterService : AccessibilityService(),
         }
     }
 
+    /** One warning each time screen time passes the limit, 2× the limit, and so on. */
+    private fun checkScreenLimit(screenSec: Long) {
+        val limitMin = Prefs.screenLimitMin(prefs)
+        if (limitMin <= 0) return
+        val level = (screenSec / (limitMin * 60L)).toInt()
+        if (level <= prefs.getInt(Prefs.SCREEN_WARNED, 0)) return
+        prefs.edit().putInt(Prefs.SCREEN_WARNED, level).apply()
+        warn("${Prefs.formatHm(screenSec)} screen time", "on your phone today", screen = true)
+    }
+
     // ---------- overlay ----------
 
     private fun isTracked(pkg: String?) = pkg != null && pkg in Prefs.apps(prefs)
@@ -286,7 +301,7 @@ class ReelCounterService : AccessibilityService(),
         pill = null
     }
 
-    private fun warn(headline: String, detail: String) {
+    private fun warn(headline: String, detail: String, screen: Boolean = false) {
         if (pill == null) refresh()
         pill?.warn("$headline · take a break")
         if (prefs.getBoolean(Prefs.VIBRATE, true)) {
@@ -295,7 +310,8 @@ class ReelCounterService : AccessibilityService(),
             vib?.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 120, 100, 120), -1))
         }
         val fullscreen = prefs.getBoolean(Prefs.FULLSCREEN_WARN, true)
-        if (fullscreen) showWarning(headline, detail)
+        if (fullscreen) showWarning(headline, detail, screen)
+        else if (screen && pill == null) Toast.makeText(this, "$headline. Time for a break.", Toast.LENGTH_LONG).show()
         if (prefs.getBoolean(Prefs.SOUND, true)) {
             if (!fullscreen) pauseReelAudio()   // full-screen warning already paused it
             ringtone?.stop()
@@ -330,16 +346,35 @@ class ReelCounterService : AccessibilityService(),
         focusRequest = null
     }
 
-    private fun showWarning(headline: String, detail: String) {
+    private fun showWarning(headline: String, detail: String, screen: Boolean = false) {
         if (warning != null) return
-        val label = Prefs.SUPPORTED[fgPkg]?.substringBefore(" ") ?: "app"
-        val v = WarningView(
-            this, headline, detail, label,
-            Mood.ratio(prefs.getInt(Prefs.COUNT, 0), prefs.getLong(Prefs.SECONDS, 0),
-                Prefs.reelLimit(prefs), Prefs.timeLimitMin(prefs)),
-            onClose = { dismissWarning(); performGlobalAction(GLOBAL_ACTION_HOME) },
-            onContinue = { dismissWarning() },
-        )
+        val v = if (screen) {
+            val limit = Prefs.screenLimitMin(prefs) * 60f
+            WarningView(
+                this, headline, detail,
+                closeLabel = "Lock phone",
+                lastStep = "Lock your phone and put it face-down for a while",
+                keepLabel = "Keep using",
+                ratio = if (limit > 0) prefs.getLong(Prefs.SCREEN_SECONDS, 0) / limit else 1f,
+                onClose = {
+                    dismissWarning()
+                    performGlobalAction(if (Build.VERSION.SDK_INT >= 28) GLOBAL_ACTION_LOCK_SCREEN else GLOBAL_ACTION_HOME)
+                },
+                onContinue = { dismissWarning() },
+            )
+        } else {
+            val label = Prefs.SUPPORTED[fgPkg]?.substringBefore(" ") ?: "app"
+            WarningView(
+                this, headline, detail,
+                closeLabel = "Close $label",
+                lastStep = "Close $label and put your phone face-down",
+                keepLabel = "Keep watching",
+                ratio = Mood.ratio(prefs.getInt(Prefs.COUNT, 0), prefs.getLong(Prefs.SECONDS, 0),
+                    Prefs.reelLimit(prefs), Prefs.timeLimitMin(prefs)),
+                onClose = { dismissWarning(); performGlobalAction(GLOBAL_ACTION_HOME) },
+                onContinue = { dismissWarning() },
+            )
+        }
         val lp = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -367,7 +402,7 @@ class ReelCounterService : AccessibilityService(),
     override fun onSharedPreferenceChanged(p: SharedPreferences, key: String?) {
         if (key == Prefs.APPS) applyPackageFilter()
         if (key == Prefs.OFFSET_DP || key == Prefs.POSITION) pill?.let { try { wm.updateViewLayout(it, params()) } catch (_: Exception) { } }
-        if (key != Prefs.SECONDS && key?.startsWith("as_") != true) refresh()
+        if (key != Prefs.SECONDS && key != Prefs.SCREEN_SECONDS && key?.startsWith("as_") != true) refresh()
     }
 
     override fun onInterrupt() {}

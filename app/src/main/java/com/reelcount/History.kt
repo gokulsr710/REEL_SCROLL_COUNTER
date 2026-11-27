@@ -13,6 +13,7 @@ data class DayStats(
     val seconds: Long,
     val apps: Map<String, Pair<Int, Long>>,   // package -> (reels, seconds)
     val hours: IntArray,                     // reels per hour of day, 0..23
+    val screen: Long = 0,                    // seconds the phone was unlocked and in use
 )
 
 /**
@@ -46,6 +47,13 @@ object History {
         return s
     }
 
+    /** +1 second of screen time (phone unlocked, screen on). Returns today's new total. */
+    fun recordScreenSecond(p: SharedPreferences): Long {
+        val s = p.getLong(Prefs.SCREEN_SECONDS, 0) + 1
+        p.edit().putLong(Prefs.SCREEN_SECONDS, s).apply()
+        return s
+    }
+
     fun today(p: SharedPreferences): DayStats {
         val apps = Prefs.SUPPORTED.keys.mapNotNull { k ->
             val c = p.getInt(APP_C + k, 0); val s = p.getLong(APP_S + k, 0)
@@ -53,11 +61,12 @@ object History {
         }.toMap()
         val date = try { LocalDate.parse(p.getString(Prefs.DAY, null)) } catch (_: Exception) { LocalDate.now() }
         return DayStats(date, p.getInt(Prefs.COUNT, 0), p.getLong(Prefs.SECONDS, 0), apps,
-            IntArray(24) { p.getInt(HOUR + it, 0) })
+            IntArray(24) { p.getInt(HOUR + it, 0) }, p.getLong(Prefs.SCREEN_SECONDS, 0))
     }
 
     fun clearToday(e: SharedPreferences.Editor) {
         e.putInt(Prefs.COUNT, 0).putLong(Prefs.SECONDS, 0).remove(Prefs.WARNED_LEVEL)
+            .putLong(Prefs.SCREEN_SECONDS, 0).remove(Prefs.SCREEN_WARNED)
         for (k in Prefs.SUPPORTED.keys) e.remove(APP_C + k).remove(APP_S + k)
         for (h in 0..23) e.remove(HOUR + h)
     }
@@ -67,7 +76,7 @@ object History {
         val apps = JSONObject()
         d.apps.forEach { (k, v) -> apps.put(k, JSONArray().put(v.first).put(v.second)) }
         json.put(d.date.toString(), JSONObject()
-            .put("c", d.count).put("s", d.seconds).put("a", apps)
+            .put("c", d.count).put("s", d.seconds).put("sc", d.screen).put("a", apps)
             .put("h", JSONArray().apply { d.hours.forEach { put(it) } }))
         val cutoff = LocalDate.now().minusDays(KEEP_DAYS)
         json.keys().asSequence().toList().forEach { k ->
@@ -95,7 +104,7 @@ object History {
         }
         val h = o.optJSONArray("h")
         return DayStats(date, o.optInt("c"), o.optLong("s"), apps,
-            IntArray(24) { h?.optInt(it) ?: 0 })
+            IntArray(24) { h?.optInt(it) ?: 0 }, o.optLong("sc"))
     }
 
     private fun load(p: SharedPreferences): JSONObject =

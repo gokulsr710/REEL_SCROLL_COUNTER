@@ -92,12 +92,15 @@ class MainActivity : BaseActivity() {
         // Limits
         val reelLimit = findViewById<EditText>(R.id.reelLimit)
         val timeLimit = findViewById<EditText>(R.id.timeLimit)
+        val screenLimit = findViewById<EditText>(R.id.screenLimit)
         reelLimit.setText(Prefs.reelLimit(prefs).toString())
         timeLimit.setText(Prefs.timeLimitMin(prefs).toString())
+        screenLimit.setText(Prefs.screenLimitMin(prefs).toString())
         findViewById<Button>(R.id.btnSave).setOnClickListener {
             prefs.edit()
                 .putInt(Prefs.REEL_LIMIT, reelLimit.text.toString().toIntOrNull() ?: 0)
                 .putInt(Prefs.TIME_LIMIT, timeLimit.text.toString().toIntOrNull() ?: 0)
+                .putInt(Prefs.SCREEN_LIMIT, screenLimit.text.toString().toIntOrNull() ?: 0)
                 .apply()
             Toast.makeText(this, "Limits saved", Toast.LENGTH_SHORT).show()
         }
@@ -253,8 +256,9 @@ class MainActivity : BaseActivity() {
         val dialog = AlertDialog.Builder(this)
             .setTitle("Reset today's count?")
             .setMessage(
-                "This will permanently delete today's progress so far: $c reels and $time of " +
-                    "scrolling time. Your counts will start again from zero. This can't be undone."
+                "This will permanently delete today's progress so far: $c reels, $time of " +
+                    "scrolling time and ${Prefs.formatHm(prefs.getLong(Prefs.SCREEN_SECONDS, 0))} of screen time. " +
+                    "Your counts will start again from zero. This can't be undone."
             )
             .setNegativeButton("Cancel", null)
             .setPositiveButton("Reset") { _, _ ->
@@ -291,6 +295,26 @@ class MainActivity : BaseActivity() {
             "$c of $rl reels")
         bar(R.id.timeBar, R.id.timeBarLabel, tl > 0, if (tl > 0) s / (tl * 60f) else 0f,
             "${s / 60} of $tl minutes")
+
+        // Screen time (all apps, phone unlocked)
+        val screen = prefs.getLong(Prefs.SCREEN_SECONDS, 0)
+        val sl = Prefs.screenLimitMin(prefs)
+        findViewById<TextView>(R.id.screenTime).text = Prefs.formatHm(screen)
+        val screenBar = findViewById<ProgressBar>(R.id.screenBar)
+        val screenOver = sl > 0 && screen >= sl * 60L
+        findViewById<TextView>(R.id.screenLimitText).text = when {
+            sl <= 0 -> "No limit set"
+            screenOver -> "Over ${Prefs.formatHm(sl * 60L)} limit"
+            else -> "of ${Prefs.formatHm(sl * 60L)}"
+        }
+        findViewById<TextView>(R.id.screenLimitText).setTextColor(
+            getColor(if (screenOver) R.color.chart_over else R.color.text_muted))
+        screenBar.visibility = if (sl > 0) View.VISIBLE else View.GONE
+        if (sl > 0) {
+            screenBar.progress = ((screen / (sl * 60f)).coerceIn(0f, 1f) * 1000).toInt()
+            screenBar.progressTintList = ColorStateList.valueOf(
+                getColor(if (screenOver) R.color.chart_over else R.color.accent))
+        }
 
         // Challenge: show status on the button; lock Reset and app choices while live
         val locked = Challenge.isLocked(prefs)

@@ -217,6 +217,46 @@
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
+        <!-- Screen time -->
+        <TextView style="@style/Section" android:text="SCREEN TIME" />
+        <LinearLayout style="@style/Card" android:paddingTop="16dp" android:paddingBottom="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/screenTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/text_primary"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/screenLimitText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_muted"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <TextView
+                style="@style/Body"
+                android:layout_marginTop="2dp"
+                android:text="Time your phone was unlocked today, in all apps"
+                android:textColor="@color/text_muted"
+                android:textSize="13sp" />
+            <ProgressBar
+                android:id="@+id/screenBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="12dp"
+                android:max="1000"
+                android:progressDrawable="@drawable/progress_track" />
+        </LinearLayout>
+
         <!-- Limits -->
         <TextView style="@style/Section" android:text="DAILY LIMITS" />
         <LinearLayout style="@style/Card">
@@ -247,10 +287,24 @@
                     android:text="Minutes per day" />
                 <EditText android:id="@+id/timeLimit" style="@style/Input" android:hint="30" android:maxLength="4" />
             </LinearLayout>
+            <View style="@style/Divider" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/Row"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Screen time per day (minutes)" />
+                <EditText android:id="@+id/screenLimit" style="@style/Input" android:hint="180" android:maxLength="4" />
+            </LinearLayout>
             <TextView
                 style="@style/Body"
                 android:layout_marginTop="4dp"
-                android:text="You'll be warned once, by whichever limit you hit first, then again at 2×, 3×… Set 0 to turn a limit off."
+                android:text="Reels and minutes: you're warned once by whichever you hit first, then again at 2×, 3×… Screen time has its own warning. Set 0 to turn a limit off."
                 android:textColor="@color/text_muted"
                 android:textSize="13sp" />
             <Button

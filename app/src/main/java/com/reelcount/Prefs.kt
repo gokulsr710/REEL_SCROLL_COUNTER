@@ -23,6 +23,17 @@ object Prefs {
     const val THEME = "theme"            // "system" | "light" | "dark"
     const val POSITION = "position"      // "left" | "center" | "right"
     const val FULLSCREEN_WARN = "fullscreen_warn"
+    const val SCREEN_LIMIT = "screen_limit"     // daily screen time limit in minutes (0 = off)
+    const val SCREEN_SECONDS = "screen_s"       // today's unlocked screen time
+    const val SCREEN_WARNED = "screen_warned"   // highest screen-limit level already warned today
+    fun screenLimitMin(p: SharedPreferences) = p.getInt(SCREEN_LIMIT, 0)
+
+    /** "3h 05m" / "42m" */
+    fun formatHm(totalSec: Long): String {
+        val m = totalSec / 60
+        return if (m >= 60) "${m / 60}h %02dm".format(m % 60) else "${m}m"
+    }
+
     const val WELCOMED = "welcomed"           // welcome screen already shown
     const val WARNED_LEVEL = "warned_level"   // highest limit level already warned about today
     const val SOUND = "sound"            // play a sound on warning
